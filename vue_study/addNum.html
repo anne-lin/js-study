@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车-demo</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item,index) in shopping">
+        <input type="checkbox" value="item.checked">{{item.name}}-{{item.price}}
+    </div>
+    <div>{{sum}}</div>
+</div>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            shopping:[
+                {
+                name:"apple1",
+                price:"1",
+                checked:false
+            },{
+                name:"apple2",
+                price:"2",
+                    checked:false
+            },{
+                name:"apple3",
+                price:"3",
+                    checked:false
+            },{
+                name:"apple4",
+                price:"4",
+                    checked:false
+            },{
+                name:"apple5",
+                price:"5",
+                    checked:false
+            },{
+                name:"apple6",
+                price:"6",
+                    checked:false
+            },{
+                name:"apple7",
+                price:"7",
+                    checked:false
+            }]
+        },
+        computed:{
+            sum(){
+                return this.shopping.reduce((pre,item,index)=>{
+                    console.log(index);
+                    if(index == 1){
+                        pre=pre.checked ? pre.price : 0;
+                    }
+                    return item.checkbox ? pre+item.price:pre;
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>
