@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    const createImgProxy=(img,loadImg,realImg)=>{
+        let hasLoad=false;
+        let imageLoad=new Image();
+        imageLoad.src=loadImg;
+        imageLoad.onload=()=>{
+            if(hasLoad){
+                return;
+            }
+            Reflect.set(img,"src",realImg);
+            document.getElementsByTagName("img")[0].src=realImg;
+            //document.body.appendChild(img);
+            hasLoad=true;
+        };
+        return new Proxy(img,{
+            get(obj,prop){
+                if(prop == "src" && !hasLoad){
+                    return imageLoad;
+                }
+                return  obj[prop]
+            }
+        })
+    };
+    const img=new Image();
+    const imgProxy=createImgProxy(img,"./img/b.jpeg","./img/a.png");
+  /* console.log(imgProxy);
+   console.log(imgProxy);*/
+    //img.src="./img/b.jpeg";
+    document.body.appendChild(imgProxy.src);
+    //imgProxy.src="./img/a.png";
+    console.log(imgProxy.src)
+
+   /* let p=new Proxy({
+        name:"linyh"
+    },{
+        get(obj,prop){
+            console.log(obj,prop);
+            return obj[prop]
+        }
+    });
+    console.log(p.name);*/
+
+</script>
+</body>
+</html>
