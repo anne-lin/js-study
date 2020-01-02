@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router study</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.1.3/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    页面
+    <div>
+        <router-link to="/news/18">新闻1</router-link>
+        <router-link to="/news/19">新闻4</router-link>
+        <router-link to="/a">新闻2</router-link>
+        <router-link to="/b">新闻3</router-link>
+    </div>
+    <router-view></router-view>
+</div>
+<script>
+    let router=new VueRouter({
+        routes:[{
+            path:"/news/:id",
+            component:{
+                template:`<div>新闻1</div>`,
+                beforeRouteUpdate(value, old_value, next){
+                    console.log(value, old_value);
+                    if(true==confirm('如果离开本页，数据会丢失，继续吗？')){
+                        next();
+                    }
+                }
+            }
+        },{
+            path:"/a",
+            component:{
+                template:`<div>新闻2</div>`
+            }
+        },{
+            path:"/b",
+            component:{
+                template:`<div>新闻3</div>`
+            }
+        },]
+    });
+    let app=new Vue({
+        el:"#app",
+        data:{
+
+        },
+        router
+    })
+</script>
+</body>
+</html>

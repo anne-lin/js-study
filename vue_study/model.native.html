@@ -14,33 +14,6 @@
     <p>{{age}}</p>
 </div>
 <script>
-   /* let el=document.getElementById("app");
-    let template=el.innerHTML;
-
-    let _data={
-        name:"linyh",
-        age:18
-    };
-    let data=new Proxy(_data,{
-        set(obj,name,val){
-            obj.name=val;
-            render();
-        }
-    });
-    render();
-    function render() {
-        el.innerHTML=template.replace(/\{\{\w+\}\}/g,function (str) {
-            return data[str.slice(2,str.length-2)]
-        });
-        console.log("value:",this.value);
-        Array.from(document.getElementsByTagName("input")).filter(item=>item.getAttribute("v-model")).forEach(item=>{
-            let name=item.getAttribute("v-model");
-            item.value=data[name];
-            item.oninput=function () {
-                data[name]=this.value;
-            }
-        })
-    }*/
    class Vue{
        constructor(data){
            let that=this;
